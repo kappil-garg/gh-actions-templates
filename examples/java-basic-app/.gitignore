@@ -67,6 +67,12 @@ Thumbs.db
 .gradle/
 build/
 
+# Don’t ignore Gradle wrapper files
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+!gradlew
+!gradlew.bat
+
 # Maven
 .mvn/
 pom.xml.tag
