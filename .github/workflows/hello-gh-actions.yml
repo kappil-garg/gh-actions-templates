@@ -1,0 +1,33 @@
+name: Hello GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  basic-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 👋 Say hello
+        run: echo "Hi from GitHub Actions! 🚀"
+
+      - name: 🌿 Show branch name
+        run: echo "Current branch => ${{ github.ref_name }}"
+
+      - name: 🕒 Show current date & time
+        run: date
+
+      - name: 📂 List repo files
+        run: ls -R
+
+      - name: 🔎 Show GitHub context (summary)
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
