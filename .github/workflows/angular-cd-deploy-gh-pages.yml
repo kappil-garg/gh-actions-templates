@@ -1,0 +1,36 @@
+name: Angular CD Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ secrets.NODE_VERSION }}  # Add Node version to the repo secrets
+
+      - name: 📦 Install dependencies
+        run: |
+          npm install
+        working-directory: examples/angular-basic-app
+
+      - name: 🏗️ Build Angular app
+        run: |
+          npm run build --if-present --prod
+        working-directory: examples/angular-basic-app
+
+      - name: 🌐 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./examples/angular-basic-app/dist/angular-basic-app  # Path to your build folder
+          keep_files: false
