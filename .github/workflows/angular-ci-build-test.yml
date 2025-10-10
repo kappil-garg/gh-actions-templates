@@ -26,6 +26,11 @@ jobs:
           npm install
         working-directory: examples/angular-basic-app
 
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
       - name: 🏗️ Build Angular app
         run: |
           npm run build --if-present
@@ -33,5 +38,5 @@ jobs:
 
       - name: ✅ Run Tests
         run: |
-          npm run test -- --watch=false --browsers=ChromeHeadlessCI --reporters=progress
+          npm run test -- --watch=false --browsers=ChromeHeadless --reporters=progress
         working-directory: examples/angular-basic-app
