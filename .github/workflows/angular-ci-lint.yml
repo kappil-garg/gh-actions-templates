@@ -1,12 +1,15 @@
-name: Angular CD Deploy to GitHub Pages
+name: Angular CI Lint & Format
 
 on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,14 +26,17 @@ jobs:
           npm install
         working-directory: examples/angular-basic-app
 
-      - name: 🏗️ Build Angular app
+      - name: 🔍 Run ESLint for TypeScript and HTML files
         run: |
-          npx ng build --configuration production --base-href /
+          npm run lint
         working-directory: examples/angular-basic-app
 
-      - name: 🌐 Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./examples/angular-basic-app/dist/angular-basic-app/browser  # Path to your build folder
-          keep_files: false
+      - name: 🎨 Run Stylelint for SCSS files
+        run: |
+          npm run lint:scss
+        working-directory: examples/angular-basic-app
+
+      - name: 🧹 Run Prettier Format Check
+        run: |
+          npm run format:check
+        working-directory: examples/angular-basic-app

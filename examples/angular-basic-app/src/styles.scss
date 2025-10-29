@@ -1,12 +1,16 @@
 /* Global styles for GitHub Actions Demo App */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background:
-    radial-gradient(1000px 600px at 50% -20%, #eef2ff 0%, rgba(238, 242, 255, 0) 60%),
-    linear-gradient(#f8fafc, #ffffff);
+    radial-gradient(
+      1000px 600px at 50% -20%,
+      #eef2ff 0%,
+      rgb(238 242 255 / 0%) 60%
+    ),
+    linear-gradient(#f8fafc, #fff);
 }
