@@ -70,5 +70,9 @@
     "stylelint-config-standard-scss": "^16.0.0",
     "stylelint-scss": "^6.12.1",
     "typescript": "~5.8.2"
+  },
+  "overrides": {
+    "tar": ">=7.5.2",
+    "vite": ">=7.1.11"
   }
 }

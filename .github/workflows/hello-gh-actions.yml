@@ -3,8 +3,11 @@ name: Hello GitHub Actions
 on:
   push:
     branches:
-      - main
+    - main
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   basic-checks:
