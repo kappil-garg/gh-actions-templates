@@ -13,6 +13,12 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: 📥 Checkout Code
@@ -30,12 +36,19 @@ jobs:
 
       - name: 🏗️ Build Angular app
         run: |
-          npx ng build --configuration production --base-href /
+          npx ng build --configuration production --base-href /${{ github.event.repository.name }}/
         working-directory: examples/angular-basic-app
 
-      - name: 🌐 Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: 📋 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./examples/angular-basic-app/dist/angular-basic-app/browser  # Path to your build folder
-          keep_files: false
+          path: ./examples/angular-basic-app/dist/angular-basic-app/browser
+
+      - name: 🌐 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
